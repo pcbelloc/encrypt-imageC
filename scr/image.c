@@ -9,6 +9,10 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
+
+// STB_IMAGE decode PNG/JPEG into RGB pixel data
+// for conversion to PPM without relying on ImageMagick.
+
 int width, height, channel;
 unsigned char  *data = stbi_load("input.png", &width, &height, &channel);
 
@@ -16,6 +20,8 @@ if(!data){
     perror("Error: no data found!");
     return 1;
 }
+
+//------------------------------------------------------------------------------
 
 ppmimage *ppm_readimg(const char *filename){
     FILE *file = fopen(filename, "rb");
