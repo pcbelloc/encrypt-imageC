@@ -23,6 +23,8 @@ typedef struct
 ppmimage **ppm_readimg(const char *filename);
 void ppm_destroy(ppmimage* image);
 
+void ppm_encrypt(ppmimage *image, const uint16_t *key);
+
 bool ppm_writeimage(const char *filename, ppmimage *image);
 
 // https://www.youtube.com/watch?v=LRajghjH5BI. 1:08 - 4:50, header file for PPM read/write perms.
