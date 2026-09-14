@@ -1,10 +1,21 @@
+/*
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h" //POR QUE ERRO????
+*/
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <image.h>
 #include <fcntl.h>
 #include <stdlib.h>
 
+int width, height, channel;
+unsigned char  *data = stbi_load("input.png", &width, &height, &channel);
 
+if(!data){
+    perror("Error: no data found!");
+    return 1;
+}
 
 ppmimage *ppm_readimg(const char *filename){
     FILE *file = fopen(filename, "rb");
