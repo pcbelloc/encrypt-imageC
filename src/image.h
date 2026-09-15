@@ -7,7 +7,7 @@
 
 typedef struct
 {
-    uint16_t r, g, b; //usando 16_t pois max_val de PPM é 65536, botando 36 seria 2x mais memoria.
+    uint16_t r, g, b; //usando 16_t pois max_val de PPM é 65535, botando 32 seria 2x mais memoria.
                       //https://netpbm.sourceforge.net/doc/ppm.html
 } pixel;
 
