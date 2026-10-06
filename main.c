@@ -80,6 +80,13 @@ int main(int argc, char* argv[]) {
   // Aplica o algoritmo em pin e gera a saida em pout
   // ...
   //
+
+  for (int i = 0; i < in.height; i ++) {
+    for (int j = 0; j < in.width; j ++) {
+      pin[i][j].r = pout 
+    }
+  }
+  
   // Exemplo: inverte as cores
   for (int i = 0; i < in.height; i++) {
     for (int j = 0; j < in.width; j++) {
