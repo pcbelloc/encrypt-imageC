@@ -28,8 +28,8 @@ Para executar:
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STBI_FAILURE_USERMSG
-#include <stb_image.h>
-#include <stb_image_write.h>
+#include "include/stb_image.h"
+#include "include/stb_image_write.h"
 
 // Um pixel Pixel (24 bits)
 typedef struct {
@@ -81,9 +81,16 @@ int main(int argc, char* argv[]) {
   // ...
   //
 
+  //cria chave aleatoria para usar como Seed para a expressão inversivel
+  unsigned int key = (unsigned int)(rand() % 256);
+  printf("Guarde esta chave : %u\n", key);
+
+
   for (int i = 0; i < in.height; i ++) {
     for (int j = 0; j < in.width; j ++) {
-      pin[i][j].r = pout 
+      pout[i][j].r = pin[i][j].r ^ key;
+      pout[i][j].g = pin[i][j].g ^ key;
+      pout[i][j].b = pin[i][j].b ^ key;
     }
   }
   
