@@ -82,25 +82,43 @@ int main(int argc, char* argv[]) {
   //
 
   //cria chave aleatoria para usar como Seed para a expressão inversivel
-  unsigned int key = (unsigned int)(rand() % 256);
-  printf("Guarde esta chave : %u\n", key);
 
+  int opcao = 0;
 
-  for (int i = 0; i < in.height; i ++) {
-    for (int j = 0; j < in.width; j ++) {
-      pout[i][j].r = pin[i][j].r ^ key;
-      pout[i][j].g = pin[i][j].g ^ key;
-      pout[i][j].b = pin[i][j].b ^ key;
-    }
+  printf("Escolha a operação: \n");
+  printf("(1) - Encriptar\n");
+  printf("(2) - Decriptar\n");
+  scanf("%d", &opcao);
+
+  if(scanf("%d", &opcao) != 1){
+    perror ("Entrada informada inválida.\n");
+    return 1;
   }
-  
-  // Exemplo: inverte as cores
-  for (int i = 0; i < in.height; i++) {
-    for (int j = 0; j < in.width; j++) {
-      pout[i][j].r = 255 - pin[i][j].r;
-      pout[i][j].g = 255 - pin[i][j].g;
-      pout[i][j].b = 255 - pin[i][j].b;
+
+  if (opcao == 1){ 
+    unsigned int key = (unsigned int)(rand() % 256);
+    printf("Guarde esta chave : %u\n", key);
+
+
+    for (int i = 0; i < in.height; i ++) {
+      for (int j = 0; j < in.width; j ++) {
+        pout[i][j].r = 255 - (pin[i][j].r ^ key);
+        pout[i][j].g = 255 - (pin[i][j].g ^ key);
+        pout[i][j].b = 255 - (pin[i][j].b ^ key);
+      }
     }
+    
+    /*
+    // Exemplo: inverte as cores
+    for (int i = 0; i < in.height; i++) {
+      for (int j = 0; j < in.width; j++) {
+        pout[i][j].r = 255 - pin[i][j].r;
+        pout[i][j].g = 255 - pin[i][j].g;
+        pout[i][j].b = 255 - pin[i][j].b;
+      }
+    }
+    */
+
   }
 
   // Grava a imagem como PNG para registro
