@@ -141,6 +141,25 @@ int main(int argc, char* argv[]) {
 
   // --------------------------------------------------------------
 
+  int numeroDec = 0;
+
+  if (opcao == 2){
+    printf ("Informe o número dado durante a encriptografia: \n" );
+    scanf("%d", &numeroDec);
+
+    for (int i = 0; i < in.height; i ++) {
+      for (int j = 0; j < in.width; j ++) {
+        pout[i][j].r = (255 - pin[i][j].r) ^ (numeroDec + 42);     
+        pout[i][j].g = (255 - pin[i][j].g) ^ (numeroDec + 67);     
+        pout[i][j].b = (255 - pin[i][j].b) ^ (numeroDec + 69);    
+        
+
+        
+      }
+    }
+  }
+
+
   // Grava a imagem como PNG para registro
   stbi_write_png("saida.png", out.width, out.height, 3, pout, 0);
 
