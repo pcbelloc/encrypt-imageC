@@ -88,17 +88,16 @@ int main(int argc, char* argv[]) {
   printf("Escolha a operação: \n");
   printf("(1) - Encriptar\n");
   printf("(2) - Decriptar\n");
-  scanf("%d", &opcao);
 
-  if(scanf("%d", &opcao) != 1){
-    perror ("Entrada informada inválida.\n");
+  if (scanf("%d", &opcao) != 1) {
+    printf("Entrada informada invalida.\n");
     return 1;
   }
 
-  if (opcao == 1){ 
-    unsigned int key = (unsigned int)(rand() % 256);
+  if (opcao == 1){
+    srand((unsigned int)time(NULL));
+    unsigned int key = rand() % 256;
     printf("Guarde esta chave : %u\n", key);
-
 
     for (int i = 0; i < in.height; i ++) {
       for (int j = 0; j < in.width; j ++) {
