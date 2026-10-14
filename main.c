@@ -94,31 +94,50 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
+  // Opção de encriptar a imagme:
+
   if (opcao == 1){
+    
+    //Altera a cor dos pixels 
     srand((unsigned int)time(NULL));
     unsigned int key = rand() % 256;
     printf("Guarde esta chave : %u\n", key);
 
     for (int i = 0; i < in.height; i ++) {
       for (int j = 0; j < in.width; j ++) {
-        pout[i][j].r = 255 - (pin[i][j].r ^ key);
-        pout[i][j].g = 255 - (pin[i][j].g ^ key);
-        pout[i][j].b = 255 - (pin[i][j].b ^ key);
+          pout[i][j].r = 255 - (pin[i][j].r ^ (key + 42));
+          pout[i][j].g = 255 - (pin[i][j].g ^ (key + 67));
+          pout[i][j].b = 255 - (pin[i][j].b ^ (key + 69));
       }
     }
-    
-    /*
-    // Exemplo: inverte as cores
-    for (int i = 0; i < in.height; i++) {
-      for (int j = 0; j < in.width; j++) {
-        pout[i][j].r = 255 - pin[i][j].r;
-        pout[i][j].g = 255 - pin[i][j].g;
-        pout[i][j].b = 255 - pin[i][j].b;
-      }
-    }
-    */
 
+    // -----------------------------------------------------------
+
+    int *posicoes = malloc(tam * sizeof(int));
+
+    for (int i = 0; i < tam; i++) {
+      posicoes[i] = i;
+    }
+
+    // https://www.youtube.com/watch?v=FGAUekwri1Q
+    // ^ peguei o algo de shuffle deste video ^
+
+    for (int i = tam - 1; i > 0; i--) {
+      int j = rand() % (i + 1);
+
+      int temp = posicoes[i];
+      posicoes[i] = posicoes[j];
+      posicoes[j] = temp;
+    }
+
+    for (int i = 0; i < tam; i++) {
+      int destino = posicoes[i];
+
+      out.pixels[destino] = in.pixels[i];
+    }
   }
+
+  // --------------------------------------------------------------
 
   // Grava a imagem como PNG para registro
   stbi_write_png("saida.png", out.width, out.height, 3, pout, 0);
