@@ -135,6 +135,8 @@ int main(int argc, char* argv[]) {
 
       out.pixels[destino] = in.pixels[i];
     }
+
+    free(posicoes);
   }
 
   // --------------------------------------------------------------
