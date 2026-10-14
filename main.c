@@ -94,20 +94,16 @@ int main(int argc, char* argv[]) {
     return 1;
   }
 
-  // Opção de encriptar a imagme:
-
   if (opcao == 1){
-    
-    //Altera a cor dos pixels 
     srand((unsigned int)time(NULL));
     unsigned int key = rand() % 256;
     printf("Guarde esta chave : %u\n", key);
 
     for (int i = 0; i < in.height; i ++) {
       for (int j = 0; j < in.width; j ++) {
-          pout[i][j].r = 255 - (pin[i][j].r ^ (key + 42));
-          pout[i][j].g = 255 - (pin[i][j].g ^ (key + 67));
-          pout[i][j].b = 255 - (pin[i][j].b ^ (key + 69));
+          pout[i][j].r = 255 - (pin[i][j].r ^ (key + 42) % 256);
+          pout[i][j].g = 255 - (pin[i][j].g ^ (key + 67) % 256);
+          pout[i][j].b = 255 - (pin[i][j].b ^ (key + 69) % 256);
       }
     }
 
