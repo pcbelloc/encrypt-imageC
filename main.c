@@ -140,20 +140,33 @@ int main(int argc, char* argv[]) {
     }
 
     int *posicoes = malloc(tam * sizeof(int));
+    for (int i = 0; i < tam; i++) {
+      posicoes[i] = i;
+    }
 
+    srand((unsigned int) numeroDec);
 
-    for (int i = 0; i < in.height; i ++) {
-      for (int j = 0; j < in.width; j ++) {
-        pout[i][j].r = (255 - pin[i][j].r) ^ (numeroDec + 42);     
-        pout[i][j].g = (255 - pin[i][j].g) ^ (numeroDec + 67);     
-        pout[i][j].b = (255 - pin[i][j].b) ^ (numeroDec + 69);    
-        
+    for (int i = tam - 1; i > 0; i--) {
+      int j = rand() % (i + 1);
 
-        
-      }
+      int temp = posicoes[i];
+      posicoes[i] = posicoes[j];
+      posicoes[j] = temp;
+    }
+
+    for (int i = 0; i < tam; i++) {
+      int origem = posicoes[i];
+
+      out.pixels[i].r = (255 - in.pixels[origem].r) ^ ((numeroDec + 42) % 256);
+      out.pixels[i].g = (255 - in.pixels[origem].g) ^ ((numeroDec + 67) % 256);
+      out.pixels[i].b = (255 - in.pixels[origem].b) ^ ((numeroDec + 69) % 256);
     }
   }
 
+  /*
+  Aqui pra baixo somente mudei o stbi_write_png 
+  Isto foi para ele diferenciar o nome do arquivo de encriptar e decriptar, fica melhor de visualizar.
+  */
 
   // Grava a imagem como PNG para registro
   
