@@ -81,8 +81,6 @@ int main(int argc, char* argv[]) {
   // ...
   //
 
-  //cria chave aleatoria para usar como Seed para a expressão inversivel
-
   int opcao = 0;
 
   printf("Escolha a operação: \n");
@@ -99,7 +97,6 @@ int main(int argc, char* argv[]) {
     unsigned int key = rand() % 256;
     printf("Guarde esta chave : %u\n", key);
 
-    // -----------------------------------------------------------
 
     int *posicoes = malloc(tam * sizeof(int));
 
@@ -137,7 +134,13 @@ int main(int argc, char* argv[]) {
 
   if (opcao == 2){
     printf ("Informe o número dado durante a encriptografia: \n" );
-    scanf("%d", &numeroDec);
+    if (scanf("%d", &numeroDec) != 1 || numeroDec < 1 || numeroDec > 255){
+      printf ("Chave informada está inválida. \n");
+      return 1;
+    }
+
+    int *posicoes = malloc(tam * sizeof(int));
+
 
     for (int i = 0; i < in.height; i ++) {
       for (int j = 0; j < in.width; j ++) {
