@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
 
   int opcao = 0;
 
-  printf("Escolha a operação: \n");
+  printf("Escolha a operacao: \n");
   printf("(1) - Encriptar\n");
   printf("(2) - Decriptar\n");
 
@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
   int numeroDec = 0;
 
   if (opcao == 2){
-    printf ("Informe o número dado durante a encriptografia: \n" );
+    printf ("Informe o numero dado durante a encriptografia: \n" );
     if (scanf("%d", &numeroDec) != 1 || numeroDec < 1 || numeroDec > 255){
       printf ("Chave informada está inválida. \n");
       return 1;
