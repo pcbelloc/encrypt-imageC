@@ -161,6 +161,8 @@ int main(int argc, char* argv[]) {
       out.pixels[i].g = (255 - in.pixels[origem].g) ^ ((numeroDec + 67) % 256);
       out.pixels[i].b = (255 - in.pixels[origem].b) ^ ((numeroDec + 69) % 256);
     }
+    
+    free(posicoes);
   }
 
   /*
