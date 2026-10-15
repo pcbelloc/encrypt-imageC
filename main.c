@@ -99,14 +99,6 @@ int main(int argc, char* argv[]) {
     unsigned int key = rand() % 256;
     printf("Guarde esta chave : %u\n", key);
 
-    for (int i = 0; i < in.height; i ++) {
-      for (int j = 0; j < in.width; j ++) {
-          pout[i][j].r = 255 - (pin[i][j].r ^ (key + 42) % 256);
-          pout[i][j].g = 255 - (pin[i][j].g ^ (key + 67) % 256);
-          pout[i][j].b = 255 - (pin[i][j].b ^ (key + 69) % 256);
-      }
-    }
-
     // -----------------------------------------------------------
 
     int *posicoes = malloc(tam * sizeof(int));
@@ -114,6 +106,8 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < tam; i++) {
       posicoes[i] = i;
     }
+
+    srand(key);
 
     // https://www.youtube.com/watch?v=FGAUekwri1Q
     // ^ peguei o algo de shuffle deste video ^
@@ -129,7 +123,9 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < tam; i++) {
       int destino = posicoes[i];
 
-      out.pixels[destino] = in.pixels[i];
+      out.pixels[destino].r = 255 - (in.pixels[i].r ^ ((key + 42) % 256));
+      out.pixels[destino].g = 255 - (in.pixels[i].g ^ ((key + 67) % 256));
+      out.pixels[destino].b = 255 - (in.pixels[i].b ^ ((key + 69) % 256));
     }
 
     free(posicoes);
@@ -157,7 +153,15 @@ int main(int argc, char* argv[]) {
 
 
   // Grava a imagem como PNG para registro
-  stbi_write_png("saida.png", out.width, out.height, 3, pout, 0);
+  
+  if(opcao ==1){
+    stbi_write_png("encriptada.png", out.width, out.height, 3, pout, 0);
+
+  }
+
+  if (opcao == 2){
+    stbi_write_png("decriptada.png", out.width, out.height, 3, pout, 0);
+  }
 
   free(in.pixels);
   free(out.pixels);
